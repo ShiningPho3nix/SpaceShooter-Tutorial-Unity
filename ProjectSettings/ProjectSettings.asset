@@ -44,8 +44,8 @@ PlayerSettings:
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
-  defaultScreenWidthWeb: 960
-  defaultScreenHeightWeb: 600
+  defaultScreenWidthWeb: 600
+  defaultScreenHeightWeb: 900
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 0
   m_MTRendering: 1
@@ -593,7 +593,7 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   cloudProjectId: 3e1296b3-d102-494d-80b6-cb84ab0e37bd
   framebufferDepthMemorylessMode: 0
-  projectName: 
+  projectName: SpaceShooter
   organizationId: shiningpho3nix
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
