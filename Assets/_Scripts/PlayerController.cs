@@ -11,22 +11,34 @@ public class Boundary
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
-    public float speed;
-    public float tilt;
+    private GameController gameController;
+    private AudioSource shotAudio;
     public Boundary boundary;
-    public float life;
-
     public GameObject shot;
     public Transform shotspawn;
-    public float fireRate;
 
-    private AudioSource shotAudio;
     private float nextShot = 0.0f;
+    public float speed;
+    public float tilt;
+    public float life;
+    public float fireRate;
+    public float armor;
 
     private void Start()
     {
         shotAudio = gameObject.GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
+
+        GameObject gameControllerObject = GameObject.FindGameObjectWithTag("GameController");
+        if (gameControllerObject != null)
+        {
+            gameController = gameControllerObject.GetComponent<GameController>();
+        }
+        else
+        {
+            Debug.Log("Could not find GameController Object!");
+        }
+        gameController.SetPlayerLife(life);
     }
 
     private void FixedUpdate()
@@ -55,5 +67,26 @@ public class PlayerController : MonoBehaviour
             Instantiate(shot, shotspawn.position, shotspawn.rotation);
             shotAudio.Play();
         }
+        if (gameController.GetPlayerLife() <= 0f)
+        {
+            gameController.GameOver();
+        }
+    }
+
+    public void DamageTaken(float damage)
+    {
+        life = life - (damage - armor);
+        gameController.SetPlayerLife(life);
+        gameController.UpdateText();
+        if (life < 0)
+        {
+            gameController.GameOver();
+            Destroy(gameObject);
+        }
+    }
+
+    public void SetLife(float newLife)
+    {
+        life = newLife;
     }
 }

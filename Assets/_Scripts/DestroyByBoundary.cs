@@ -24,7 +24,7 @@ public class DestroyByBoundary : MonoBehaviour
         Destroy(other.gameObject);
         if (other.tag == "Asteroid")
         {
-            gameController.DecreaseHazardCount();
+            gameController.DecreaseHazardCount(); // TODO also add enemies as soon as they are implemented
         }
     }
 }
