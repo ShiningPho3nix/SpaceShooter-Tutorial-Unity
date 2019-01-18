@@ -41,43 +41,51 @@ public class DestroyByContact : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(tag.ToString() + " " + other.tag.ToString());
-        if (other.tag == "Boundary")
+        if (other.CompareTag("Boundary") || other.CompareTag("Enemy"))
         {
             return;
         }
-        if (tag == "Player" && other.tag == "Asteroid")
+        if (CompareTag("Asteroid") && other.CompareTag("Player"))
         {
-            Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+            Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(gameObject);
             playerController.DamageTaken(asteroidDamage);
         }
-        if (tag == "Player" &&other.tag == "Enemy")
+        if (CompareTag("Enemy") && other.CompareTag("Player"))
         {
             playerController.DamageTaken(enemyHitDamage);
-            Instantiate(enemyExplosion, other.transform.position, other.transform.rotation);
-            Destroy(other.gameObject);
+            Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+            Instantiate(enemyExplosion, transform.position, transform.rotation);
         }
-        if (tag == "Player" && other.tag == "EnemyShot")
+        if (CompareTag("EnemyShot") && other.CompareTag("Player"))
         {
+            Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
             playerController.DamageTaken(enemyShotDamage);
-            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
-        if (tag == "PlayerShot" &&  other.tag == "Asteroid")
+        if (CompareTag("Asteroid") &&  other.CompareTag("PlayerShot"))
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
             Instantiate(explosion, transform.position, transform.rotation);
-            gameController.AddScore(scoreValue); //TODO asteroid score value?
+            gameController.AddScore(scoreValue);
             gameController.DecreaseHazardCount(); //asteroid count?
         }
-        if (tag == "PlayerShot" && other.tag == "Enemy")
+        if (CompareTag("Enemy") && other.CompareTag("PlayerShot"))
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
             Instantiate(enemyExplosion, transform.position, transform.rotation);
-            gameController.AddScore(scoreValue); //TODO enemy score value?
-            gameController.DecreaseHazardCount(); //TODO enemy count?
+            gameController.AddScore(scoreValue); 
+            //gameController.DecreaseHazardCount(); //TODO enemy count?
+        }
+        if (CompareTag("Enemy") && other.CompareTag("Asteroid"))
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+            Instantiate(enemyExplosion, transform.position, transform.rotation);
+            Instantiate(explosion, other.transform.position, other.transform.rotation);
+            //enemy.damagetaken?
         }
     }
-
 }

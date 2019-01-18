@@ -10,8 +10,8 @@ using UnityEngine.UI;
 /// </summary>
 public class GameController : MonoBehaviour
 {
-    public GameObject asteroidHazard;
-    public GameObject enemyHazard;
+    public GameObject[] asteroidHazards;
+    public GameObject[] enemyHazards;
     public Vector3 spawnValues;
 
     private float playerLife;
@@ -61,7 +61,9 @@ public class GameController : MonoBehaviour
                 {
                     break;
                 }
-                Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), 0.0f, spawnValues.z);
+                GameObject asteroidHazard = asteroidHazards[Random.Range(0, asteroidHazards.Length)];
+                Debug.Log(asteroidHazard.name);
+                Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
                 Quaternion spawnRotation = Quaternion.identity;
                 Instantiate(asteroidHazard, spawnPosition, spawnRotation);
                 yield return new WaitForSeconds(spawnRate);
