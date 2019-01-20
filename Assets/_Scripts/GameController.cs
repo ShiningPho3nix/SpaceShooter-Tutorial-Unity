@@ -140,7 +140,7 @@ public class GameController : MonoBehaviour
         {
             playerLife = newLife;
         }
-        
+        UpdateText();
     }
 
     public float GetPlayerLife()

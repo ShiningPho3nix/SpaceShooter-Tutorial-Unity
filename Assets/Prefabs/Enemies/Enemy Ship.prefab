@@ -43,6 +43,9 @@ GameObject:
   - component: {fileID: 3465100883153040124}
   - component: {fileID: 3465100883153040123}
   - component: {fileID: 3465100883153040127}
+  - component: {fileID: 2090577714946386220}
+  - component: {fileID: 1011258848269375811}
+  - component: {fileID: 8767281939407523507}
   - component: {fileID: 3465100883153040096}
   m_Layer: 0
   m_Name: Enemy Ship
@@ -109,13 +112,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b927682cc705d4eb5e37cf4855de4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 100004, guid: 2857e183f4cd3df4e9096e5b578bd32f, type: 3}
-  playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 3}
-  enemyExplosion: {fileID: 100012, guid: 384371afbb4354cc9a3fc68eab303756, type: 3}
   scoreValue: 1000
-  asteroidDamage: 0
-  enemyHitDamage: 1
-  enemyShotDamage: 3
+  asteroids:
+    asteroidExplosion: {fileID: 0}
+    asteroidDamage: 0
+    asteroidLife: 0
+  enemies:
+    enemyExplosion: {fileID: 100012, guid: 384371afbb4354cc9a3fc68eab303756, type: 3}
+    enemyHitDamage: 3
+    enemyShotDamage: 0
+    enemyLife: 7
+  playerValues:
+    playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 3}
+    playerShotDamage: 0
 --- !u!114 &3465100883153040127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +141,68 @@ MonoBehaviour:
   shotSpawn: {fileID: 3465100882472454117}
   MaxFireRate: 1.5
   delay: 0.5
+--- !u!114 &2090577714946386220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3465100883153040122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aadddaef5945fb64d9ebb8bd90f4ed17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 5
+  minSpeed: 10
+  minMass: 20
+  maxMass: 50
+--- !u!114 &1011258848269375811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3465100883153040122}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf18e8b61dd9a2349b5ef83b8b3410bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dodge: 5
+  smoothing: 7.5
+  tilt: 10
+  startWait: {x: 0.5, y: 1}
+  maneuverTime: {x: 1, y: 2}
+  maneuverWait: {x: 1, y: 2}
+  boundary:
+    xMin: -6
+    xMax: 6
+    zMin: -20
+    zMax: 20
+--- !u!114 &8767281939407523507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3465100883153040122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f76b8dfcd128e0146848f7871fc90adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dodge: 5
+  smoothing: 7.5
+  tilt: 10
+  startWait: {x: 1, y: 1}
+  maneuverTime: {x: 1, y: 1}
+  maneuverWait: {x: 1, y: 1}
+  boundary:
+    xMin: -6
+    xMax: 6
+    zMin: -20
+    zMax: 20
 --- !u!82 &3465100883153040096
 AudioSource:
   m_ObjectHideFlags: 0

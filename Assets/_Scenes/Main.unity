@@ -895,11 +895,11 @@ MonoBehaviour:
     zMax: 8
   shot: {fileID: 2569284119843281054, guid: 5e172d2eaa61cf2408c4b8a70bb48032, type: 3}
   shotspawn: {fileID: 1591602611}
-  speed: 10
+  speed: 13
   tilt: 5
-  life: 5
-  fireRate: 0.5
-  armor: 0.3
+  life: 10
+  fireRate: 0.2
+  armor: 0.5
 --- !u!82 &659170284
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1008,13 +1008,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b927682cc705d4eb5e37cf4855de4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 100012, guid: 384371afbb4354cc9a3fc68eab303756, type: 3}
-  playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 3}
-  enemyExplosion: {fileID: 100012, guid: 384371afbb4354cc9a3fc68eab303756, type: 3}
   scoreValue: 0
-  asteroidDamage: 0
-  enemyHitDamage: 0
-  enemyShotDamage: 0
+  asteroids:
+    asteroidExplosion: {fileID: 0}
+    asteroidDamage: 0
+    asteroidLife: 0
+  enemies:
+    enemyExplosion: {fileID: 0}
+    enemyHitDamage: 0
+    enemyShotDamage: 0
+    enemyLife: 0
+  playerValues:
+    playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 3}
+    playerShotDamage: 5
 --- !u!1 &677749768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1314,7 +1320,7 @@ Transform:
   m_GameObject: {fileID: 1152670237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 1, z: 34}
+  m_LocalScale: {x: 15, y: 1, z: 23}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1455,6 +1461,8 @@ MonoBehaviour:
   - {fileID: 2141174744858346203, guid: 8c8c6751a8afe63458bda52c7dea83d5, type: 3}
   - {fileID: 3924835232952569992, guid: 0f26f64295230db4f9ed41487376ca73, type: 3}
   - {fileID: 7385188569610374836, guid: 99b022696ce2b354ba59ccc11a162046, type: 3}
+  - {fileID: 3465100883153040122, guid: 6eaf4e5fd8c570449a40612ab930c0ad, type: 3}
+  - {fileID: 3465100883153040122, guid: 6eaf4e5fd8c570449a40612ab930c0ad, type: 3}
   enemyHazards: []
   spawnValues: {x: 6, y: 0, z: 16}
   spawnRate: 1.8
@@ -1494,7 +1502,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7b04c59dd84f14039b601e1abbe7b884, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1665,8 +1673,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657666749}
-  m_LocalRotation: {x: 0.36273783, y: 0.14314121, z: -0.0564936, w: 0.9190976}
-  m_LocalPosition: {x: 0, y: 0, z: -650.11926}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 73973109}
@@ -1674,8 +1682,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -365.0154, y: 632.7444}
-  m_SizeDelta: {x: -400, y: -850}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -380, y: -810}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1657666751
 MonoBehaviour:

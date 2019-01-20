@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidMover : MonoBehaviour
+public class Mover : MonoBehaviour
 {
     public float maxSpeed;
     public float minSpeed;

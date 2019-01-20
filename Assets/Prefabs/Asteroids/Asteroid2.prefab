@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5604256198944933355}
   - component: {fileID: 3829379550251546953}
   - component: {fileID: 4205691741101462393}
+  - component: {fileID: 1974125127739560028}
   m_Layer: 0
   m_Name: Asteroid2
   m_TagString: Asteroid
@@ -91,13 +92,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b927682cc705d4eb5e37cf4855de4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 100004, guid: 2857e183f4cd3df4e9096e5b578bd32f, type: 3}
-  playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 3}
-  enemyExplosion: {fileID: 0}
   scoreValue: 5
-  asteroidDamage: 1
-  enemyHitDamage: 0
-  enemyShotDamage: 0
+  asteroids:
+    asteroidExplosion: {fileID: 100004, guid: 2857e183f4cd3df4e9096e5b578bd32f, type: 3}
+    asteroidDamage: 1
+    asteroidLife: 1
+  enemies:
+    enemyExplosion: {fileID: 0}
+    enemyHitDamage: 0
+    enemyShotDamage: 0
+    enemyLife: 0
+  playerValues:
+    playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 3}
+    playerShotDamage: 0
+  asteroidValues: {fileID: 0}
 --- !u!114 &4205691741101462393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +122,21 @@ MonoBehaviour:
   minSpeed: 4
   minMass: 0.01
   maxMass: 1
+--- !u!114 &1974125127739560028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3924835232952569992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dd212e645e3fee4b9aa1eda0d31102e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asteroidLife: 1
+  asteroidDamage: 1
+  asteroidArmor: 1
 --- !u!1001 &4632913221958766686
 PrefabInstance:
   m_ObjectHideFlags: 0

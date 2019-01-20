@@ -2,26 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyByContact : MonoBehaviour
+[System.Serializable]
+public class Asteroids
 {
-    public GameObject explosion;
-    public GameObject playerExplosion;
-    public GameObject enemyExplosion;
-    public int scoreValue;
-
+    public GameObject asteroidExplosion;
     public float asteroidDamage;
+    public float asteroidLife;
+}
+
+[System.Serializable]
+public class Enemies
+{
+    public GameObject enemyExplosion;
+
     public float enemyHitDamage;
     public float enemyShotDamage;
+    public float enemyLife;
+}
 
+[System.Serializable]
+public class PlayerValues
+{
+    public GameObject playerExplosion;
+    public float playerShotDamage;
+}
+
+public class DestroyByContact : MonoBehaviour
+{
+    public int scoreValue;
+    
     private GameController gameController;
     private PlayerController playerController;
-    private readonly PlayerController enemyController;
+
+    public Asteroids asteroids;
+    public Enemies enemies;
+    public PlayerValues playerValues;
+
+    public AsteroidValues asteroidValues;
 
     private void Start()
     {
         GameObject gameControllerObject = GameObject.FindGameObjectWithTag("GameController");
         GameObject playerControllerObject = GameObject.FindGameObjectWithTag("Player");
-        GameObject enemyControllerObject = GameObject.FindGameObjectWithTag("Enemy"); // TODO initiate enermycontroller, as soon as the script exists
+        // Same for later classes Enemy and Asteroid, to let them take damage and deal damage variable to each other and the player. Also life and other things
+
         if (gameControllerObject != null)
         {
             gameController = gameControllerObject.GetComponent<GameController>();
@@ -47,44 +71,64 @@ public class DestroyByContact : MonoBehaviour
         }
         if (CompareTag("Asteroid") && other.CompareTag("Player"))
         {
-            Instantiate(explosion, transform.position, transform.rotation);
-            Destroy(gameObject);
-            playerController.DamageTaken(asteroidDamage);
+            asteroidValues = GameObject.Find(name).GetComponent<AsteroidValues>();
+            asteroidValues.DamageTaken(5);
+            Debug.Log(asteroidValues.GetAsteroidLife());
+            if (asteroidValues.GetAsteroidLife() <= 0f)
+            {
+                Instantiate(asteroids.asteroidExplosion, transform.position, transform.rotation);
+                Destroy(gameObject);
+            }
+            playerController.DamageTaken(asteroidValues.asteroidDamage);
+            if (gameController.GetPlayerLife() == 0f)
+            {
+                Instantiate(playerValues.playerExplosion, other.transform.position, other.transform.rotation);
+                Destroy(other.gameObject);
+            }
         }
         if (CompareTag("Enemy") && other.CompareTag("Player"))
         {
-            playerController.DamageTaken(enemyHitDamage);
-            Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
-            Instantiate(enemyExplosion, transform.position, transform.rotation);
+            Instantiate(enemies.enemyExplosion, transform.position, transform.rotation);
+            Destroy(gameObject);
+            playerController.DamageTaken(enemies.enemyHitDamage);
+            if (gameController.GetPlayerLife() == 0f)
+            {
+                Instantiate(playerValues.playerExplosion, other.transform.position, other.transform.rotation);
+                Destroy(other.gameObject);
+            }
         }
         if (CompareTag("EnemyShot") && other.CompareTag("Player"))
         {
-            Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
-            playerController.DamageTaken(enemyShotDamage);
+            playerController.DamageTaken(enemies.enemyShotDamage);
             Destroy(gameObject);
+            if (gameController.GetPlayerLife() == 0f)
+            {
+                Instantiate(playerValues.playerExplosion, other.transform.position, other.transform.rotation);
+                Destroy(other.gameObject);
+            }
         }
-        if (CompareTag("Asteroid") &&  other.CompareTag("PlayerShot"))
+        if (CompareTag("Asteroid") && other.CompareTag("PlayerShot"))
         {
+            Instantiate(asteroids.asteroidExplosion, transform.position, transform.rotation);
             Destroy(other.gameObject);
             Destroy(gameObject);
-            Instantiate(explosion, transform.position, transform.rotation);
             gameController.AddScore(scoreValue);
             gameController.DecreaseHazardCount(); //asteroid count?
         }
         if (CompareTag("Enemy") && other.CompareTag("PlayerShot"))
         {
+            Instantiate(enemies.enemyExplosion, transform.position, transform.rotation);
             Destroy(other.gameObject);
             Destroy(gameObject);
-            Instantiate(enemyExplosion, transform.position, transform.rotation);
             gameController.AddScore(scoreValue); 
             //gameController.DecreaseHazardCount(); //TODO enemy count?
         }
         if (CompareTag("Enemy") && other.CompareTag("Asteroid"))
         {
+            Instantiate(enemies.enemyExplosion, transform.position, transform.rotation);
+            Instantiate(asteroids.asteroidExplosion, other.transform.position, other.transform.rotation);
             Destroy(other.gameObject);
             Destroy(gameObject);
-            Instantiate(enemyExplosion, transform.position, transform.rotation);
-            Instantiate(explosion, other.transform.position, other.transform.rotation);
             //enemy.damagetaken?
         }
     }

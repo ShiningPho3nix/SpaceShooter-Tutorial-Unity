@@ -77,12 +77,6 @@ public class PlayerController : MonoBehaviour
     {
         life = life - (damage - armor);
         gameController.SetPlayerLife(life);
-        gameController.UpdateText();
-        if (life < 0)
-        {
-            gameController.GameOver();
-            Destroy(gameObject);
-        }
     }
 
     public void SetLife(float newLife)

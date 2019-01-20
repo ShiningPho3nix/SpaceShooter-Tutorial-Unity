@@ -167,10 +167,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b927682cc705d4eb5e37cf4855de4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 100004, guid: 2857e183f4cd3df4e9096e5b578bd32f, type: 3}
-  playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 3}
-  enemyExplosion: {fileID: 100012, guid: 384371afbb4354cc9a3fc68eab303756, type: 3}
   scoreValue: 10
-  asteroidDamage: 1
-  enemyHitDamage: 2
-  enemyShotDamage: 5
+  asteroids:
+    asteroidExplosion: {fileID: 0}
+    asteroidDamage: 0
+    asteroidLife: 0
+  enemies:
+    enemyExplosion: {fileID: 0}
+    enemyHitDamage: 0
+    enemyShotDamage: 0
+    enemyLife: 0
+  playerValues:
+    playerExplosion: {fileID: 0}
+    playerShotDamage: 1
